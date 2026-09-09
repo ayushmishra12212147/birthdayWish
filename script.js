@@ -128,10 +128,24 @@
 
     startMusic(bgAudio) {
       this.isPlayingMusic = true;
-      if (bgAudio && bgAudio.src && !bgAudio.src.endsWith('/')) {
-        bgAudio.play().catch(() => {
+      if (bgAudio) {
+        // Try playing user-provided audio file
+        const playPromise = bgAudio.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            // Audio file loaded and playing successfully
+            if (this.melodyTimer) {
+              clearInterval(this.melodyTimer);
+              this.melodyTimer = null;
+            }
+          }).catch((err) => {
+            // Audio file not found or autoplay blocked, fallback to sweet harmonic music box
+            console.log('Using synthesized ambient music-box arrangement');
+            this.startSynthesizedMusic();
+          });
+        } else {
           this.startSynthesizedMusic();
-        });
+        }
       } else {
         this.startSynthesizedMusic();
       }
@@ -140,45 +154,82 @@
     stopMusic(bgAudio) {
       this.isPlayingMusic = false;
       if (bgAudio) {
-        bgAudio.pause();
+        try { bgAudio.pause(); } catch (e) {}
       }
       if (this.melodyTimer) {
-        clearInterval(this.melodyTimer);
+        clearTimeout(this.melodyTimer);
         this.melodyTimer = null;
       }
     }
 
     startSynthesizedMusic() {
-      if (this.melodyTimer) clearInterval(this.melodyTimer);
+      if (this.melodyTimer) {
+        clearTimeout(this.melodyTimer);
+        this.melodyTimer = null;
+      }
 
-      // Sweet music-box "Happy Birthday" progression in C Major
-      const notes = [
-        { f: 261.63, d: 350 }, { f: 261.63, d: 200 }, { f: 293.66, d: 500 }, { f: 261.63, d: 500 }, { f: 349.23, d: 500 }, { f: 329.63, d: 900 },
-        { f: 261.63, d: 350 }, { f: 261.63, d: 200 }, { f: 293.66, d: 500 }, { f: 261.63, d: 500 }, { f: 392.00, d: 500 }, { f: 349.23, d: 900 },
-        { f: 261.63, d: 350 }, { f: 261.63, d: 200 }, { f: 523.25, d: 500 }, { f: 440.00, d: 500 }, { f: 349.23, d: 500 }, { f: 329.63, d: 500 }, { f: 293.66, d: 900 },
-        { f: 466.16, d: 350 }, { f: 466.16, d: 200 }, { f: 440.00, d: 500 }, { f: 349.23, d: 500 }, { f: 392.00, d: 500 }, { f: 349.23, d: 1100 }
+      // Rich, warm Music-Box & Dreamy Harp Birthday progression with Bass Chords
+      const score = [
+        // Measure 1: Happy Birthday to you (C Major / G7)
+        { m: 261.63, b: 130.81, d: 350 }, { m: 261.63, b: 130.81, d: 200 }, { m: 293.66, b: 130.81, d: 500 }, { m: 261.63, b: 130.81, d: 500 }, { m: 349.23, b: 174.61, d: 500 }, { m: 329.63, b: 174.61, d: 900 },
+        // Measure 2: Happy Birthday to you (C Major / G7)
+        { m: 261.63, b: 130.81, d: 350 }, { m: 261.63, b: 130.81, d: 200 }, { m: 293.66, b: 130.81, d: 500 }, { m: 261.63, b: 130.81, d: 500 }, { m: 392.00, b: 196.00, d: 500 }, { m: 349.23, b: 174.61, d: 900 },
+        // Measure 3: Happy Birthday dear Prisha (F Major / C Major)
+        { m: 261.63, b: 130.81, d: 350 }, { m: 261.63, b: 130.81, d: 200 }, { m: 523.25, b: 261.63, d: 500 }, { m: 440.00, b: 220.00, d: 500 }, { m: 349.23, b: 174.61, d: 500 }, { m: 329.63, b: 174.61, d: 500 }, { m: 293.66, b: 146.83, d: 900 },
+        // Measure 4: Happy Birthday to you (G7 / C Major resolution)
+        { m: 466.16, b: 233.08, d: 350 }, { m: 466.16, b: 233.08, d: 200 }, { m: 440.00, b: 220.00, d: 500 }, { m: 349.23, b: 174.61, d: 500 }, { m: 392.00, b: 196.00, d: 500 }, { m: 349.23, b: 130.81, d: 1100 }
       ];
 
       this.noteIndex = 0;
       const playNextNote = () => {
         if (!this.isPlayingMusic || !this.ctx) return;
-        const current = notes[this.noteIndex];
+        const current = score[this.noteIndex];
 
+        // 1. Bell / Music-Box Lead Note
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(current.f, this.ctx.currentTime);
+        osc.frequency.setValueAtTime(current.m, this.ctx.currentTime);
 
-        // Music box envelope
-        gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + (current.d / 1000) * 1.5);
+        gain.gain.setValueAtTime(0.09, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + (current.d / 1000) * 1.8);
 
         osc.connect(gain);
         gain.connect(this.ctx.destination);
         osc.start();
-        osc.stop(this.ctx.currentTime + (current.d / 1000) * 1.5);
+        osc.stop(this.ctx.currentTime + (current.d / 1000) * 1.85);
 
-        this.noteIndex = (this.noteIndex + 1) % notes.length;
+        // 2. Warm Bass Harmony Note
+        if (current.b) {
+          const bassOsc = this.ctx.createOscillator();
+          const bassGain = this.ctx.createGain();
+          bassOsc.type = 'triangle';
+          bassOsc.frequency.setValueAtTime(current.b, this.ctx.currentTime);
+
+          bassGain.gain.setValueAtTime(0.05, this.ctx.currentTime);
+          bassGain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + (current.d / 1000) * 1.4);
+
+          bassOsc.connect(bassGain);
+          bassGain.connect(this.ctx.destination);
+          bassOsc.start();
+          bassOsc.stop(this.ctx.currentTime + (current.d / 1000) * 1.45);
+        }
+
+        // 3. Shimmer overtone (soft octave)
+        const shimmerOsc = this.ctx.createOscillator();
+        const shimmerGain = this.ctx.createGain();
+        shimmerOsc.type = 'sine';
+        shimmerOsc.frequency.setValueAtTime(current.m * 2, this.ctx.currentTime);
+
+        shimmerGain.gain.setValueAtTime(0.02, this.ctx.currentTime);
+        shimmerGain.gain.exponentialRampToValueAtTime(0.0005, this.ctx.currentTime + (current.d / 1000) * 0.9);
+
+        shimmerOsc.connect(shimmerGain);
+        shimmerGain.connect(this.ctx.destination);
+        shimmerOsc.start();
+        shimmerOsc.stop(this.ctx.currentTime + (current.d / 1000) * 0.95);
+
+        this.noteIndex = (this.noteIndex + 1) % score.length;
         this.melodyTimer = setTimeout(playNextNote, current.d);
       };
 
