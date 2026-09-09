@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 16th Birthday Prisha! ♡</title>
+  <meta name="description" content="A special birthday surprise for Prisha on turning 16, made with love by her sister.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Parisienne&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="is-loading">
+
+
+  <!-- Background Ambient Floating Elements Canvas -->
+  <canvas id="ambientCanvas" class="ambient-canvas"></canvas>
+  
+  <!-- Celebration Canvas (Party Poppers & Confetti) -->
+  <canvas id="celebrationCanvas" class="celebration-canvas"></canvas>
+
+  <!-- Sound Effects / Music Toggle -->
+  <div class="audio-control-container" id="audioControl">
+    <button class="music-pill-btn" id="musicToggleBtn" aria-label="Toggle Birthday Music">
+      <span class="music-icon-box">
+        <span class="music-note-icon">♫</span>
+        <span class="equalizer-bars">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </span>
+      </span>
+      <span class="music-label" id="musicLabel">PLAY MUSIC</span>
+    </button>
+  </div>
+  <audio id="bgAudio" loop preload="auto">
+    <source src="assets/birthday-song.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- 1. FULLSCREEN OPENING SURPRISE PRELOADER -->
+  <section class="opening-screen" id="openingScreen">
+    <div class="opening-card">
+      <div class="opening-sparkle sparkle-tl">✦</div>
+      <div class="opening-sparkle sparkle-tr">✦</div>
+      <div class="opening-sparkle sparkle-bl">✦</div>
+      <div class="opening-sparkle sparkle-br">✦</div>
+      
+      <div class="opening-tag">FOR PRISHA • SWEET SIXTEEN</div>
+      <h2 class="opening-subtext">Something special is waiting for you... <span class="heart-pulse">♡</span></h2>
+      <p class="opening-question">Ready?</p>
+      
+      <button class="btn-reveal" id="btnRevealSurprise">
+        <span class="btn-text">OPEN YOUR BIRTHDAY SURPRISE</span>
+        <span class="btn-star">✦</span>
+      </button>
+      
+      <div class="opening-footer-note">Handcrafted with love from your sister</div>
+    </div>
+  </section>
+
+  <!-- 2. FLOATING NAVIGATION -->
+  <nav class="floating-nav" id="floatingNav">
+    <div class="nav-glass-capsule">
+      <a href="#hero" class="nav-link active" data-section="hero">HOME</a>
+      <a href="#her-world" class="nav-link" data-section="her-world">HER WORLD</a>
+      <a href="#favourites" class="nav-link" data-section="favourites">HER FAVOURITES</a>
+      <a href="#memory-photo" class="nav-link" data-section="memory-photo">MEMORIES</a>
+      <a href="#milestone-16" class="nav-link" data-section="milestone-16">16</a>
+      <a href="#cake-section" class="nav-link" data-section="cake-section">WISH</a>
+      <a href="#sister-letter" class="nav-link" data-section="sister-letter">A NOTE</a>
+      <a href="#final-surprise" class="nav-link" data-section="final-surprise">SURPRISE</a>
+    </div>
+  </nav>
+
+  <!-- MAIN EXPERIENCE WRAPPER -->
+  <main class="main-content" id="mainContent">
+
+    <!-- 3. HERO SECTION -->
+    <section class="section hero-section" id="hero">
+      <div class="hero-decorative-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+      </div>
+      
+      <div class="container hero-grid">
+        <div class="hero-text-col">
+          <div class="hero-handwritten-badge reveal-fade">
+            <span class="script-accent">A little corner of the internet, made just for you ♡</span>
+          </div>
+          
+          <div class="hero-title-group">
+            <span class="hero-title-sub reveal-fade delay-1">HAPPY</span>
+            <h1 class="hero-title-main reveal-fade delay-2">
+              BIRTHDAY
+              <span class="hero-name-highlight">PRISHA</span>
+            </h1>
+          </div>
+          
+          <p class="hero-tagline reveal-fade delay-3">
+            <span class="tagline-number">16</span> & already making the world a little brighter.
+          </p>
+
+          <div class="hero-quick-pills reveal-fade delay-4">
+            <span class="mini-pill">Born 2010</span>
+            <span class="mini-pill-dot">•</span>
+            <span class="mini-pill">Sweet Sixteen</span>
+            <span class="mini-pill-dot">•</span>
+            <span class="mini-pill">Favorite Sister</span>
+          </div>
+          
+          <div class="hero-actions reveal-fade delay-5">
+            <a href="#her-world" class="btn-primary-soft">
+              <span>Explore Your Story</span>
+              <span class="btn-arrow">↓</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-photo-col">
+          <div class="polaroid-wrapper" id="heroPolaroid">
+            <div class="washi-tape tape-top"></div>
+            <div class="polaroid-card">
+              <div class="polaroid-photo-frame">
+                <!-- =========================================================================
+                     PRISHA'S HERO PHOTO:
+                     To use her real picture, save her photo into "assets/prisha_hero.jpg"
+                     or change the src attribute below to her image path/file.
+                     ========================================================================= -->
+                <img src="assets/prisha_hero.jpg" alt="Prisha on her 16th Birthday" class="polaroid-img" id="heroPhoto" loading="eager">
+                <div class="photo-shimmer"></div>
+              </div>
+              <div class="polaroid-caption">
+                <span class="caption-handwritten">Prisha, shining at 16 ♡</span>
+                <span class="caption-date">Today • Best Day</span>
+              </div>
+            </div>
+            <div class="floating-sticker sticker-star">✨</div>
+            <div class="floating-sticker sticker-heart">💖</div>
+            <div class="floating-note note-hero">the prettiest birthday girl!</div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#her-world" class="scroll-indicator" id="scrollIndicator">
+        <span class="scroll-text">SCROLL TO BEGIN</span>
+        <span class="scroll-arrow">↓</span>
+      </a>
+    </section>
+
+    <!-- 4. "HER WORLD" SECTION -->
+    <section class="section her-world-section" id="her-world">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-badge">CHAPTER ONE</span>
+          <h2 class="section-title">Here’s to the girl we’re celebrating.</h2>
+          <div class="scrapbook-divider"></div>
+        </div>
+
+        <div class="world-scrapbook-layout">
+          <!-- Layered Scrapbook Papers -->
+          <div class="scrapbook-paper-layer layer-back"></div>
+          <div class="scrapbook-paper-layer layer-mid"></div>
+          
+          <div class="scrapbook-main-card">
+            <div class="washi-tape tape-corner-tl"></div>
+            <div class="washi-tape tape-corner-tr"></div>
+            
+            <div class="milestone-number-handwritten">16</div>
+            
+            <div class="world-card-content">
+              <p class="world-lead-text">
+                Sixteen years of laughter, adventures, music, dancing, dreams and becoming the wonderful person you are.
+              </p>
+              <p class="world-sub-text">
+                Watching you grow into someone so joyful, spirited, and fiercely authentic is one of my greatest blessings. You bring a quiet warmth and a spark of magic into every room you step into.
+              </p>
+            </div>
+
+            <!-- Floating Scrapbook Handwritten Notes -->
+            <div class="scrapbook-note note-1">
+              <span>keep dancing ♡</span>
+            </div>
+            <div class="scrapbook-note note-2">
+              <span>more adventures ✈️</span>
+            </div>
+            <div class="scrapbook-note note-3">
+              <span>more memories ✨</span>
+            </div>
+            <div class="scrapbook-note note-4">
+              <span>more reasons to smile 🌸</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. HER FAVOURITES (INTERACTIVE WORLD) -->
+    <section class="section favourites-section" id="favourites">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-badge">PRISHA'S UNIVERSE</span>
+          <h2 class="section-title">Pieces of Her World</h2>
+          <p class="section-subtitle">Click on any passion to reveal a little secret thought from your sister...</p>
+        </div>
+
+        <div class="favourites-grid">
+          
+          <!-- Card 1: DANCE -->
+          <div class="fav-card" data-interest="dance" tabindex="0">
+            <div class="fav-card-inner">
+              <div class="fav-icon-stage">
+                <div class="dancer-graphic">
+                  <div class="rhythm-pulse-circle"></div>
+                  <div class="rhythm-pulse-circle-outer"></div>
+                  <div class="dancer-silhouette">💃</div>
+                  <span class="floating-note-symbol sym-1">♪</span>
+                  <span class="floating-note-symbol sym-2">♫</span>
+                  <span class="floating-note-symbol sym-3">♩</span>
+                </div>
+              </div>
+              
+              <div class="fav-content">
+                <div class="fav-pill">PASSION 01</div>
+                <h3 class="fav-title">DANCE</h3>
+                <p class="fav-quote">"For the moments when words aren't enough, she dances."</p>
+                <div class="tap-hint">Tap to expand <span>+</span></div>
+              </div>
+
+              <div class="fav-hidden-reveal">
+                <div class="hidden-divider"></div>
+                <p class="hidden-message">
+                  Never stop moving to your own rhythm. Whenever you dance, your whole face lights up, and that uninhibited joy is genuinely contagious!
+                </p>
+                <div class="hidden-tag">♡ keep owning every beat</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: MUSIC -->
+          <div class="fav-card" data-interest="music" tabindex="0">
+            <div class="fav-card-inner">
+              <div class="fav-icon-stage">
+                <div class="music-player-graphic">
+                  <div class="vinyl-disc">
+                    <div class="vinyl-center">♫</div>
+                  </div>
+                  <div class="interactive-equalizer">
+                    <span class="eq-bar bar-1"></span>
+                    <span class="eq-bar bar-2"></span>
+                    <span class="eq-bar bar-3"></span>
+                    <span class="eq-bar bar-4"></span>
+                    <span class="eq-bar bar-5"></span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="fav-content">
+                <div class="fav-pill">PASSION 02</div>
+                <h3 class="fav-title">MUSIC</h3>
+                <p class="fav-quote">"A little music can turn an ordinary moment into a memory."</p>
+                <div class="tap-hint">Tap to expand <span>+</span></div>
+              </div>
+
+              <div class="fav-hidden-reveal">
+                <div class="hidden-divider"></div>
+                <p class="hidden-message">
+                  From car rides where we scream lyrics off-key to late night earbud sharing, life with you always has the sweetest soundtrack.
+                </p>
+                <div class="hidden-tag">♡ play your favorite track today</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: MOMOS -->
+          <div class="fav-card" data-interest="momos" tabindex="0">
+            <div class="fav-card-inner">
+              <div class="fav-icon-stage">
+                <div class="momo-graphic">
+                  <div class="steam-container">
+                    <span class="steam steam-1"></span>
+                    <span class="steam steam-2"></span>
+                    <span class="steam steam-3"></span>
+                  </div>
+                  <div class="steaming-basket">
+                    <div class="momo-illustration">🥟</div>
+                  </div>
+                  <span class="momo-badge">MOMO O'CLOCK ♡</span>
+                </div>
+              </div>
+              
+              <div class="fav-content">
+                <div class="fav-pill">PASSION 03</div>
+                <h3 class="fav-title">MOMOS</h3>
+                <p class="fav-quote">"Because some things are simply non-negotiable."</p>
+                <div class="tap-hint">Tap to expand <span>+</span></div>
+              </div>
+
+              <div class="fav-hidden-reveal">
+                <div class="hidden-divider"></div>
+                <p class="hidden-message">
+                  No birthday is complete without an unlimited plate of spicy steamed momos! Today's rule: infinite momos, zero counting.
+                </p>
+                <div class="hidden-tag">♡ on the sister treat tab</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: TRAVEL -->
+          <div class="fav-card" data-interest="travel" tabindex="0">
+            <div class="fav-card-inner">
+              <div class="fav-icon-stage">
+                <div class="travel-graphic">
+                  <svg class="flight-path-svg" viewBox="0 0 200 100">
+                    <path class="flight-curve" d="M 10,80 Q 100,10 190,40" fill="none" stroke="currentColor" stroke-dasharray="4,4"/>
+                  </svg>
+                  <div class="airplane-icon">✈️</div>
+                  <div class="cloud cloud-1">☁️</div>
+                  <div class="cloud cloud-2">☁️</div>
+                  <div class="passport-stamp">PASSPORT 16</div>
+                </div>
+              </div>
+              
+              <div class="fav-content">
+                <div class="fav-pill">PASSION 04</div>
+                <h3 class="fav-title">TRAVEL</h3>
+                <p class="fav-quote">"There are places waiting to become memories."</p>
+                <div class="tap-hint">Tap to expand <span>+</span></div>
+              </div>
+
+              <div class="fav-hidden-reveal">
+                <div class="hidden-divider"></div>
+                <p class="hidden-message">
+                  Here’s to the bucket list we’re gonna conquer together! New cities, breathtaking sunsets, passport stamps, and crazy sister adventures.
+                </p>
+                <div class="hidden-tag">♡ next trip is on us</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. PHOTO / MEMORY SCRAPBOOK -->
+    <section class="section memory-section" id="memory-photo">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-badge">TIMELESS</span>
+          <h2 class="section-title">One picture. A thousand little moments.</h2>
+          <p class="section-subtitle">A candid snapshot of laughter and pure happiness.</p>
+        </div>
+
+        <div class="scrapbook-stage">
+          <div class="pushpin pin-top-left">📌</div>
+          <div class="pushpin pin-top-right">📌</div>
+          
+          <div class="memory-card" id="memoryCard">
+            <div class="washi-tape tape-mem-top"></div>
+            <div class="washi-tape tape-mem-bottom"></div>
+            
+            <div class="memory-photo-container">
+              <!-- =========================================================================
+                   PRISHA'S MEMORY PHOTO:
+                   To use her candid picture, save her photo into "assets/prisha_memory.jpg"
+                   or change the src attribute below to her image path/file.
+                   ========================================================================= -->
+              <img src="assets/prisha_memory.jpg" alt="Prisha laughing candidly" class="memory-img" id="memoryPhoto">
+              <div class="memory-shine"></div>
+            </div>
+
+            <!-- Sticky Annotations -->
+            <div class="scrapbook-tag tag-smile">
+              <span>this smile ♡</span>
+            </div>
+            <div class="scrapbook-tag tag-forever">
+              <span>keep this forever</span>
+            </div>
+            <div class="scrapbook-tag tag-energy">
+              <span>main character energy ✨</span>
+            </div>
+            <div class="scrapbook-tag tag-memories">
+              <span>more memories please!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. THE AGE 16 MOMENT -->
+    <section class="section milestone-section" id="milestone-16">
+      <div class="milestone-halo-glow"></div>
+      <div class="stars-cluster">
+        <span class="floating-star s1">✦</span>
+        <span class="floating-star s2">✦</span>
+        <span class="floating-star s3">✦</span>
+        <span class="floating-star s4">✦</span>
+        <span class="floating-star s5">✦</span>
+      </div>
+
+      <div class="container text-center">
+        <div class="milestone-badge-top">MILESTONE YEAR</div>
+        
+        <div class="giant-16-wrapper">
+          <div class="halo-circle"></div>
+          <span class="giant-16-text">16</span>
+        </div>
+
+        <h2 class="milestone-title">Sixteen looks beautiful on you.</h2>
+        
+        <p class="milestone-message">
+          May this year bring you new places, loud laughter, late-night conversations, beautiful surprises and countless moments you’ll want to remember forever.
+        </p>
+
+        <div class="milestone-quote-author">
+          <span class="script-author">Welcome to your sweetest chapter yet ♡</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. BIRTHDAY CAKE SCENE (INTERACTIVE CANDLE BLOW) -->
+    <section class="section cake-section" id="cake-section">
+      <div class="cake-ambient-glow" id="cakeGlow"></div>
+      
+      <div class="container text-center">
+        <span class="section-badge light-badge">CELEBRATION TIME</span>
+        <h2 class="section-title cake-title">Make a wish, Prisha...</h2>
+        <p class="cake-subtitle">Sixteen candles glowing just for you. Close your eyes and think of something magical.</p>
+
+        <div class="cake-interactive-stage">
+          
+          <!-- Cake Graphic Structure -->
+          <div class="birthday-cake" id="birthdayCake">
+            
+            <!-- 16 Candles Row -->
+            <div class="candles-row" id="candlesRow">
+              <div class="candle" data-index="1"><div class="flame"><div class="flame-core"></div></div><div class="candle-stick"></div><div class="smoke"></div></div>
+              <div class="candle" data-index="2"><div class="flame"><div class="flame-core"></div></div><div class="candle-stick"></div><div class="smoke"></div></div>
+              <div class="candle" data-index="3"><div class="flame"><div class="flame-core"></div></div><div class="candle-stick"></div><div class="smoke"></div></div>
+              <div class="candle" data-index="4"><div class="flame"><div class="flame-core"></div></div><div class="candle-stick"></div><div class="smoke"></div></div>
+              <div class="candle" data-index="5"><div class="flame"><div class="flame-core"></div></div><div class="candle-stick"></div><div class="smoke"></div></div>
+              <div class="candle" data-index="6"><div class="flame"><div class="flame-core"></div></div><div class="candle-stick"></div><div class="smoke"></div></div>
+              <div class="candle" data-index="7"><div class="flame"><div class="flame-core"></div></div><div class="candle-stick"></div><div class="smoke"></div></div>
+              <div class="candle" data-index="8"><div class="flame"><div class="flame-core"></div></div><div class="candle-stick"></div><div class="smoke"></div></div>
+              <div class="candle" data-index="9"><div class="flame"><div class="flame-core"></div></div><div class="candle-stick"></div><div class="smoke"></div></div>
+              <div class="candle" data-index="10"><div class="flame"><div class="flame-core"></div></div><div class="candle-stick"></div><div class="smoke"></div></div>
+              <div class="candle" data-index="11"><div class="flame"><div class="flame-core"></div></div><div class="candle-stick"></div><div class="smoke"></div></div>
+              <div class="candle" data-index="12"><div class="flame"><div class="flame-core"></div></div><div class="candle-stick"></div><div class="smoke"></div></div>
+              <div class="candle" data-index="13"><div class="flame"><div class="flame-core"></div></div><div class="candle-stick"></div><div class="smoke"></div></div>
+              <div class="candle" data-index="14"><div class="flame"><div class="flame-core"></div></div><div class="candle-stick"></div><div class="smoke"></div></div>
+              <div class="candle" data-index="15"><div class="flame"><div class="flame-core"></div></div><div class="candle-stick"></div><div class="smoke"></div></div>
+              <div class="candle" data-index="16"><div class="flame"><div class="flame-core"></div></div><div class="candle-stick"></div><div class="smoke"></div></div>
+            </div>
+
+            <!-- Cake Tiers -->
+            <div class="cake-tier tier-top">
+              <div class="frosting-drips"></div>
+              <div class="tier-decoration">🌸 ✨ 🌸</div>
+            </div>
+            <div class="cake-tier tier-middle">
+              <div class="frosting-ribbon"></div>
+              <div class="tier-pearls"></div>
+            </div>
+            <div class="cake-tier tier-bottom">
+              <div class="cake-platter"></div>
+            </div>
+          </div>
+
+          <!-- Wish Trigger Controls -->
+          <div class="wish-action-area">
+            <button class="btn-make-wish" id="btnMakeWish">
+              <span class="wish-btn-icon">🕯️</span>
+              <span class="wish-btn-text">BLOW CANDLES & MAKE A WISH ✨</span>
+            </button>
+            
+            <div class="wish-reveal-box" id="wishRevealBox">
+              <div class="wish-sparkles">✦ ✨ ✦</div>
+              <h3 class="wish-grant-text">"May every wish you make find its way to you."</h3>
+              <p class="wish-grant-sub">Your sister has your back forever and always. ♡</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. SISTER'S LETTER (EMOTIONAL HEART) -->
+    <section class="section letter-section" id="sister-letter">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-badge">FROM THE HEART</span>
+          <h2 class="section-title">A little something from someone who’ll always have your back...</h2>
+          <div class="scrapbook-divider"></div>
+        </div>
+
+        <div class="envelope-interactive-scene">
+          
+          <!-- Closed & Openable Envelope -->
+          <div class="vintage-envelope-box" id="envelopeBox">
+            
+            <!-- Envelope Back Wall -->
+            <div class="envelope-back"></div>
+            
+            <!-- The Letter Content (Slides up when opened) -->
+            <div class="letter-paper" id="letterPaper">
+              <div class="letter-header">
+                <span class="letter-date">September 10, 2026 • To My Dearest Prisha</span>
+                <span class="letter-stamp">💌</span>
+              </div>
+              <div class="letter-body">
+                <p class="letter-line line-1">Dearest Prisha,</p>
+                <p class="letter-line line-2">
+                  "Whatever you choose to do, wherever life takes you, I'll always be right there — to help you, stand by you, and cheer you on."
+                </p>
+                <p class="letter-line line-3">
+                  Sixteen years ago, you arrived and turned our family into an adventure. Watching you laugh at silly jokes, master your dance steps, crave momos at midnight, and dream about seeing the world has been the greatest gift.
+                </p>
+                <p class="letter-line line-4">
+                  Keep dancing, keep dreaming, keep exploring, keep being exactly who you are. Life is going to take you to so many beautiful places, and no matter where you go, you'll never have to walk alone.
+                </p>
+                <p class="letter-line line-5 letter-signoff">
+                  Happy 16th Birthday, Prisha. ♡
+                </p>
+                <p class="letter-line line-6 letter-sender">
+                  — Your Sister
+                </p>
+              </div>
+              <div class="letter-seal-watermark">♡</div>
+            </div>
+
+            <!-- Envelope Front Pockets -->
+            <div class="envelope-front"></div>
+            <div class="envelope-flap" id="envelopeFlap">
+              <div class="wax-seal" id="waxSeal">
+                <span class="wax-seal-initial">P</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Open Letter Button -->
+          <div class="envelope-controls">
+            <button class="btn-open-letter" id="btnOpenLetter">
+              <span>OPEN YOUR LETTER</span>
+              <span class="letter-btn-icon">💌</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. FINAL SURPRISE SECTION (MIDNIGHT PURPLE) -->
+    <section class="section surprise-section" id="final-surprise">
+      <div class="midnight-sky-backdrop">
+        <div class="constellation constellation-1"></div>
+        <div class="constellation constellation-2"></div>
+        <div class="crescent-moon">🌙</div>
+      </div>
+
+      <div class="container text-center">
+        <div class="surprise-pre-text">
+          <span class="surprise-badge">ONE LAST SECRET</span>
+          <h2 class="surprise-head-question">Wait... there’s one more thing.</h2>
+          <p class="surprise-head-sub">A special gift to carry into your sixteenth year...</p>
+        </div>
+
+        <div class="gift-box-interactive-stage">
+          
+          <!-- 3D Gift Box -->
+          <div class="gift-box" id="giftBox">
+            <div class="gift-glow"></div>
+            
+            <div class="gift-lid" id="giftLid">
+              <div class="gift-bow">
+                <div class="bow-loop bow-left"></div>
+                <div class="bow-loop bow-right"></div>
+                <div class="bow-center"></div>
+              </div>
+              <div class="lid-top"></div>
+            </div>
+            
+            <div class="gift-body">
+              <div class="gift-ribbon-vertical"></div>
+              <div class="gift-ribbon-horizontal"></div>
+              <div class="gift-tag-handwritten">For Prisha ♡</div>
+            </div>
+          </div>
+
+          <div class="surprise-action-area">
+            <button class="btn-open-gift" id="btnOpenGift">
+              <span>OPEN YOUR SURPRISE</span>
+              <span class="gift-sparkle-icon">✨</span>
+            </button>
+          </div>
+
+          <!-- Grand Surprise Reveal Message -->
+          <div class="grand-reveal-card" id="grandRevealCard">
+            <div class="reveal-stars-burst">✦ ✨ 🌟 ✨ ✦</div>
+            <h1 class="grand-birthday-title">HAPPY BIRTHDAY, PRISHA ♡</h1>
+            
+            <div class="grand-quote-container">
+              <p class="grand-quote-1">
+                "Here’s to 16, to everything you’ve been, everything you are, and everything you’re going to become."
+              </p>
+              <div class="grand-divider"></div>
+              <p class="grand-quote-2">
+                Keep smiling. Keep dancing. Keep exploring. Keep being you.
+              </p>
+            </div>
+            
+            <div class="sister-signature">
+              <span class="sig-script">Forever your biggest cheerleader,</span>
+              <span class="sig-sister">Your Sister ♡</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. FOOTER -->
+    <footer class="site-footer">
+      <div class="container text-center">
+        <div class="footer-heart-float">💖</div>
+        <p class="footer-made-with">Made with <span class="footer-heart-icon">♡</span> especially for Prisha</p>
+        <p class="footer-year-tag">16 • 2010 • Forever young at heart</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
